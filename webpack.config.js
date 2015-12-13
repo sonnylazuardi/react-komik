@@ -3,7 +3,7 @@ var webpack = require('webpack');
 module.exports = {
     devtool: 'source-map',
     entry: [
-        './src/index.js'
+        './src/Komik.js'
     ],
     module: {
         loaders: [{
@@ -22,6 +22,8 @@ module.exports = {
         path: __dirname + '/dist/',
         publicPath: '/',
         filename: 'bundle.js',
+        library: 'Komik',
+        libraryTarget: 'umd'
     },
     devServer: {
         contentBase: __dirname + '/dist/'
