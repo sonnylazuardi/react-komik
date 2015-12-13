@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 16.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg version="1.1"
+	 id="svg548" xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape" xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd" xmlns:svg="http://www.w3.org/2000/svg" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:cc="http://creativecommons.org/ns#" xmlns:dc="http://purl.org/dc/elements/1.1/" sodipodi:docbase="/var/www/html/svg_gallery/svg/callouts" sodipodi:version="0.32" inkscape:version="0.45+devel" sodipodi:docname="rnd_rectg_l.svg" inkscape:output_extension="org.inkscape.output.svg.inkscape"
+	 xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="517.5px" height="468.5px"
+	 viewBox="0 0 517.5 468.5" enable-background="new 0 0 517.5 468.5" xml:space="preserve">
+<filter  id="filter4836" inkscape:collect="always">
+	<feGaussianBlur  id="feGaussianBlur4838" stdDeviation="6.7296048" inkscape:collect="always"></feGaussianBlur>
+</filter>
+<sodipodi:namedview  id="base" inkscape:zoom="0.7725" inkscape:cx="446.50814" inkscape:cy="170.7371" showgrid="false" inkscape:current-layer="svg548" inkscape:window-y="34" inkscape:window-x="550" inkscape:window-width="731" inkscape:window-height="717">
+	</sodipodi:namedview>
+<g id="path715" sodipodi:nodetypes="csssscccssss" filter="url(#filter4836)">
+	<path opacity="0.498" enable-background="new    " d="M477.109,94.025c11.306,33.425,9.071,175.855-2.398,226.638
+		c-6.589,27.968-25.207,40.772-45.568,40.772l-145.096-0.002l115.117,101.929L220.493,362.633c0,0-140.215,2.452-170.28-11.99
+		c-10.148-6.076-19.696-13.254-29.977-34.774C6.29,289.186,9.176,115.77,17.837,77.237c7.498-29.301,42.741-34.627,63.554-34.775
+		l336.959-2.398C448.389,39.85,466.395,63.487,477.109,94.025z"/>
+</g>
+<path id="path559" sodipodi:nodetypes="csssscccssss" fill="#FFFFFF" stroke="#000000" stroke-width="10" stroke-linejoin="round" d="
+	M490.054,82.698c11.308,33.425,9.073,175.854-2.397,226.638c-6.589,27.969-25.207,40.771-45.567,40.771H296.992l115.117,101.928
+	L233.438,351.307c0,0-140.214,2.451-170.278-11.992c-10.149-6.074-19.696-13.252-29.978-34.772
+	c-13.945-26.685-11.06-200.098-2.398-238.631c7.498-29.301,42.741-34.627,63.554-34.775l336.96-2.398
+	C461.333,28.523,479.34,52.16,490.054,82.698z"/>
+</svg>
