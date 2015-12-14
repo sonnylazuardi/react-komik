@@ -8,7 +8,7 @@
     "webserver": "node src/server.js",
     "build": "node_modules/.bin/webpack",
     "dev": "node_modules/.bin/webpack-dev-server",
-    "deploy": "NODE_ENV=production webpack -p"
+    "deploy": "NODE_ENV=production webpack -p --config webpack.production.js"
   },
   "repository": {
     "type": "git",

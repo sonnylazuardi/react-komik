@@ -56,6 +56,8 @@ class Strip extends Component {
 Strip.defaultProps = {
     width: 500,
     height: 500,
+    top: 0,
+    left: 0,
     padding: 0,
     title: 'Comic Title',
     column: 2,

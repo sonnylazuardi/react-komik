@@ -4,10 +4,12 @@ class Panel extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            props: {}
+            props: {},
+            rect: null,
+            background: null
         };
     }
-    componentDidMount() {
+    update() {
     	var _this = this;
         setTimeout(() => {
             var { canvas, index } = this.props;
@@ -44,20 +46,35 @@ class Panel extends Component {
                 selectable: false
             };
 
-            var rect = new fabric.Rect(currentProps);
+            if (!this.state.rect){
+                var rect = new fabric.Rect(currentProps);
+            } else {
+                var rect = this.state.rect;
+                rect.set(currentProps);
+            }
             this.setState({
-                props: currentProps
+                props: currentProps,
+                rect: rect
             });
 
             if (background) {
-            	fabric.Image.fromURL(background, (image) => {
-            		image.set(currentProps);
-            		canvas.add(image);
-            	});
+                if (!this.state.background) {
+                	fabric.Image.fromURL(background, (image) => {
+                        this.setState({background: image});
+                		image.set(currentProps);
+                		canvas.add(image);
+                	});
+                }
             }
 
             canvas.add(rect);
         });
+    }
+    componentDidMount() {
+        this.update();
+    }
+    componentWillReceiveProps() {
+        this.update();
     }
     render() {
         var _this = this;

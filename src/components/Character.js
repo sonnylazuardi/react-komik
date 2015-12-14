@@ -4,10 +4,11 @@ class Character extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            props: {}
+            props: {},
+            image: null,
         };
     }
-    componentDidMount() {
+    update() {
         var _this = this;
         setTimeout(() => {
             var { canvas, index } = this.props;
@@ -15,6 +16,8 @@ class Character extends Component {
             fabric.Image.fromURL(this.props.image, (image) => {
                 var { parent, scale, top, left, bottom, align } = this.props;
                 bottom = parseInt(bottom);
+
+                if (this.state.image) image = this.state.image;
 
                 image.scale(scale);
                 // default use bottom
@@ -50,14 +53,21 @@ class Character extends Component {
 
                 image.set(currentProps);
 
-                this.setState({
-                    props: currentProps
-                });
-
-                
-                canvas.add(image);
+                if (!this.state.image) {
+                    this.setState({
+                        props: currentProps,
+                        image: image 
+                    });
+                    canvas.add(image);
+                }
             });
         });
+    }
+    componentDidMount() {
+        this.update();
+    }
+    componentWillReceiveProps() {
+        this.update();
     }
     render() {
         var _this = this;

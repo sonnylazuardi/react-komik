@@ -1,6 +1,14 @@
 import React, { Component } from 'react';
 
 class Balloon extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            image: null,
+            text: null,
+            group: null
+        };
+    }
     createBalloon() {
         var _this = this;
         var { canvas, index } = this.props;
@@ -8,8 +16,10 @@ class Balloon extends Component {
             if (!canvas) reject(false);
             fabric.loadSVGFromURL(this.props.image, (objects, options) => {
                 var { parent, top, left, bottom, align, scale, height } = _this.props;
-                var image = fabric.util.groupSVGElements(objects, options);
                 bottom = parseInt(bottom);
+
+                var image = fabric.util.groupSVGElements(objects, options);
+                // if (this.state.image) image = this.state.image;
 
                 image.scaleToHeight(height);
 
@@ -37,11 +47,17 @@ class Balloon extends Component {
                 // add parent left
                 _left += parent.left;
 
-                image.set({
+                var currentProps = {
                     top: _top,
                     left: _left
-                });
+                };
+                
                 // canvas.add(image);
+                
+                this.setState({
+                    image: image
+                });
+                image.set(currentProps);
                 resolve(image);   
             });
         });
@@ -52,7 +68,7 @@ class Balloon extends Component {
 
         if (!canvas) return;
 
-        var text = new fabric.Textbox(_this.props.text, {
+        var currentProps = {
             top: image.top + padding,
             left: image.left + padding,
             width: image.width * image.scaleX - 2 * padding - 5,
@@ -61,21 +77,37 @@ class Balloon extends Component {
             fontWeight: 'bold',
             textAlign: textAlign,
             fontFamily: fontFamily || _this.props.rootParent.fontFamily
-        });
+        };
+ 
+        var text = new fabric.Textbox(_this.props.text, currentProps);
+        var balloonGroup = new fabric.Group([image, text], {});
 
-        var balloonGroup = new fabric.Group([image, text], {
-
-        });
-
-        canvas.add(balloonGroup);
+        if (!this.state.group) {
+            this.setState({
+                group: balloonGroup 
+            });
+            canvas.add(balloonGroup);
+        } else {
+            canvas.remove(this.state.group);
+            this.setState({
+                group: balloonGroup 
+            });
+            canvas.add(balloonGroup);
+        }
     }
-    componentDidMount() {
+    update() {
         var _this = this;
         setTimeout(() => {
             _this.createBalloon().then((image) => {
                 _this.createText(_this, image);
             }, () => {});
         });
+    }
+    componentDidMount() {
+        this.update();
+    }
+    componentWillReceiveProps() {
+        this.update();
     }
     render() {
         return (<div />);
