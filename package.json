@@ -2,7 +2,7 @@
   "name": "react-komik",
   "version": "0.0.1",
   "description": "ReactJS based comic strip creator",
-  "main": "index.js",
+  "main": "src/Komik.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "webserver": "node src/server.js",
