@@ -1,6 +1,6 @@
 {
   "name": "react-komik",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "ReactJS based comic strip creator",
   "main": "dist/komik.js",
   "scripts": {
