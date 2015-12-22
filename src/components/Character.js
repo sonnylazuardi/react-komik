@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import objectAssign from 'object-assign';
 
 class Character extends Component {
     constructor(props) {
@@ -71,12 +72,12 @@ class Character extends Component {
     }
     render() {
         var _this = this;
-        var parentProps = Object.assign({}, _this.props, _this.state.props);
+        var parentProps = objectAssign({}, _this.props, _this.state.props);
         delete parentProps.children;
         
-        var childProps = Object.assign({}, {canvas: _this.props.canvas, parent: parentProps, rootParent: _this.props.rootParent});
+        var childProps = objectAssign({}, {canvas: _this.props.canvas, parent: parentProps, rootParent: _this.props.rootParent});
         var childrenWithProps = React.Children.map(this.props.children, function(child, id) {
-            var currentProps = Object.assign({}, childProps, {index: id});
+            var currentProps = objectAssign({}, childProps, {index: id});
             return React.cloneElement(child, currentProps);
         });
         return (

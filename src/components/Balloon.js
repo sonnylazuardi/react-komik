@@ -64,22 +64,25 @@ class Balloon extends Component {
     }
     createText(_this, image) {
         var { canvas, index } = _this.props;
-        var { parent, top, left, bottom, align, scale, fontFamily, textAlign, padding } = _this.props;
+        var { parent, top, left, bottom, align, scale, fontFamily, textAlign, padding, fontSize } = _this.props;
 
         if (!canvas) return;
+
+        var text = _this.props.text;
+        if (_this.props.rootParent.upperCase) text = text.toUpperCase();
 
         var currentProps = {
             top: image.top + padding,
             left: image.left + padding,
             width: image.width * image.scaleX - 2 * padding - 5,
             height: image.height * image.scaleY - 2 * padding - 5,
-            fontSize: 12,
+            fontSize: fontSize || _this.props.rootParent.fontSize,
             fontWeight: 'bold',
             textAlign: textAlign,
-            fontFamily: fontFamily || _this.props.rootParent.fontFamily
+            fontFamily: fontFamily || _this.props.rootParent.fontFamily,
         };
  
-        var text = new fabric.Textbox(_this.props.text, currentProps);
+        var text = new fabric.Textbox(text, currentProps);
         var balloonGroup = new fabric.Group([image, text], {});
 
         if (!this.state.group) {
@@ -119,13 +122,14 @@ Balloon.defaultProps = {
     image: 'chat_right.svg',
     top: null,
     left: null,
-    bottom: -25,
+    bottom: -70,
     scale: 0.8,
     align: 'left',
     padding: 12,
     height: 150,
     textAlign: 'center',
-    fontFamily: null
+    fontFamily: null,
+    fontSize: null
 };
 
 export default Balloon;

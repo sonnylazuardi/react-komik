@@ -38,6 +38,7 @@
     "webpack": "^1.12.9"
   },
   "dependencies": {
-    "fabric-webpack": "^1.6.0-rc.1"
+    "fabric-webpack": "^1.6.0-rc.1",
+    "object-assign": "^4.0.1"
   }
 }

@@ -3,11 +3,12 @@ import { render } from 'react-dom';
 import { Panel, Character, Balloon, Strip } from './Komik';
 
 let Comic = (props) => (
-    <Strip title="React Komik!" column="2">
-        <Panel fill="#c8eafb">
+    <Strip title="React Komik!" column="2" fontFamily="Patrick Hand" fontSize="13" upperCase={true}>
+        <Panel>
             <Character
-                image="char1.png"
-                scale="0.5">
+                image="char1.jpg"
+                left="70"
+                scale="0.65">
                 <Balloon 
                     left="-80" 
                     height="120" 
@@ -15,37 +16,45 @@ let Comic = (props) => (
                     text="Have You heard about ReactJS? You can write HTML in JS..."/>
             </Character>
         </Panel>
-        <Panel fill="#c8eafb">
+        <Panel>
             <Character
-                image="char2.png"
-                scale="0.48">
+                image="char2.jpg"
+                left="30"
+                scale="0.65">
                 <Balloon
                     height="146"
-                    left="40"
+                    left="60"
+                    bottom="-80"
                     image="chat_right.svg"
-                    text="Yeah it's pretty cool. You can use JSX syntax to write web, mobile, even TV app"
+                    text="Yeah it's pretty cool. You can use JSX syntax to write web, mobile app, even presentation"
                     />
             </Character>
         </Panel>
-        <Panel fill="#c8eafb">
+        <Panel>
             <Character
-                image="char1_hype.png"
-                scale="0.45">
+                image="char1_hype.jpg"
+                scale="0.9"
+                left="30">
                 <Balloon
                     height="130"
-                    left="-70"
+                    left="-40"
                     image="chat_left.svg"
                     text="Hey look! It's React Komik! We can create this comic strip with ReactJS!"
                     />
             </Character>
-            <Character
-                image="logo_small.png"
-                top="20"
-                left="130"
-                scale="1"
-                />
         </Panel>
-        <Panel background="magic.jpg" />
+        <Panel>
+            <Character
+                image="char2_magic.jpg"
+                scale="0.65">
+                <Balloon
+                    height="80"
+                    left="80"
+                    image="chat_right.svg"
+                    text="It's MAGIC"
+                    />
+            </Character>
+        </Panel>
     </Strip>
 );
 

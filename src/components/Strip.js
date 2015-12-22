@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import objectAssign from 'object-assign';
 
 class Strip extends Component {
     constructor(props) {
@@ -7,9 +8,41 @@ class Strip extends Component {
             canvas: null
         };
     }
+    onEffect(effect) {
+        var {canvas} = this.state;
+        canvas.deactivateAll();
+        var overlayImageUrl = canvas.toDataURL('png');
+        this.refs.imageBuffer.setAttribute('src', overlayImageUrl)
+        var filterImageUrl = this.refs.imageBuffer.getAttribute('src');
+        fabric.Image.fromURL(filterImageUrl, function(img) {
+            switch (effect) {
+                case 'grayscale':
+                    img.filters.push(new fabric.Image.filters.Grayscale());
+                    break;
+                case 'sepia':
+                    img.filters.push(new fabric.Image.filters.Sepia());
+                    break;
+                case 'sepia2':
+                    img.filters.push(new fabric.Image.filters.Sepia2());
+                    break;
+                case 'invert':
+                    img.filters.push(new fabric.Image.filters.Invert());
+                    break;
+            }
+            img.applyFilters(canvas.renderAll.bind(canvas));
+            canvas.add(img);
+        });
+        canvas.deactivateAll().renderAll();
+    }
+    onDownload() {
+        var link = this.refs.downloadLink;
+        link.setAttribute('href', canvas.toDataURL());
+        link.setAttribute('download', this.props.title+'-react-komik.png');
+        link.click();
+    }
     componentDidMount() {
         var canvas = new fabric.Canvas('canvas');
-        var {padding, width, height, fill, stroke, fontFamily, strokeWidth} = this.props;
+        var {padding, width, height, fill, stroke, fontFamily, strokeWidth, fontSize} = this.props;
         var rect = new fabric.Rect({
             top: padding,
             left: padding,
@@ -22,7 +55,10 @@ class Strip extends Component {
         });
         canvas.add(rect);
 
-        var text = new fabric.Text(this.props.title, {
+        var title = this.props.title;
+        if (this.props.upperCase) title = title.toUpperCase();
+
+        var text = new fabric.Text(title, {
             top: padding + 20,
             left: width / 2,
             originX: 'center',
@@ -37,17 +73,26 @@ class Strip extends Component {
     }
     render() {
         var _this = this;
-        var parentProps = Object.assign({}, _this.props);
+        var parentProps = objectAssign({}, _this.props);
         delete parentProps.children;
-        var childProps = Object.assign({}, {canvas: _this.state.canvas, parent: parentProps, rootParent: parentProps});
+        var childProps = objectAssign({}, {canvas: _this.state.canvas, parent: parentProps, rootParent: parentProps});
         var childrenWithProps = React.Children.map(this.props.children, function(child, id) {
-            var currentProps = Object.assign({}, childProps, {index: id});
+            var currentProps = objectAssign({}, childProps, {index: id});
             return React.cloneElement(child, currentProps);
         });
         return (
             <div>
                 <canvas id="canvas" {...this.props}></canvas>
+                <img ref="imageBuffer" src=""  style={{display:'none'}} />
+                <a ref="downloadLink" style={{display: 'none'}}>Download</a>
                 {childrenWithProps}
+                <div>
+                    <button onClick={this.onEffect.bind(this, 'grayscale')}>Grayscale</button> 
+                    <button onClick={this.onEffect.bind(this, 'sepia')}>Sepia</button> 
+                    <button onClick={this.onEffect.bind(this, 'sepia2')}>Sepia 2</button> 
+                    <button onClick={this.onEffect.bind(this, 'invert')}>Invert</button> 
+                    <button onClick={this.onDownload.bind(this)}>Download</button>
+                </div>
             </div>
         );
     }
@@ -64,7 +109,9 @@ Strip.defaultProps = {
     fill: 'white',
     stroke: 'black',
     strokeWidth: 0,
-    fontFamily: 'Arial'
+    fontFamily: 'Arial',
+    fontSize: 13,
+    upperCase: false
 };
 
 export default Strip;
