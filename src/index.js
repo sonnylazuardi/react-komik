@@ -6,7 +6,7 @@ let Comic = (props) => (
     <Strip title="React Komik!" column="2" fontFamily="Patrick Hand" fontSize="13" upperCase={true}>
         <Panel>
             <Character
-                image="char1.jpg"
+                image="char1.png"
                 left="70"
                 scale="0.65">
                 <Balloon 
@@ -18,7 +18,7 @@ let Comic = (props) => (
         </Panel>
         <Panel>
             <Character
-                image="char2.jpg"
+                image="char2.png"
                 left="30"
                 scale="0.65">
                 <Balloon
@@ -32,7 +32,7 @@ let Comic = (props) => (
         </Panel>
         <Panel>
             <Character
-                image="char1_hype.jpg"
+                image="char1_hype.png"
                 scale="0.9"
                 left="30">
                 <Balloon
@@ -45,7 +45,7 @@ let Comic = (props) => (
         </Panel>
         <Panel>
             <Character
-                image="char2_magic.jpg"
+                image="char2_magic.png"
                 scale="0.65">
                 <Balloon
                     height="80"
@@ -55,6 +55,7 @@ let Comic = (props) => (
                     />
             </Character>
         </Panel>
+        <Character image="footer.png" align="center" bottom="20" scale="0.8" />
     </Strip>
 );
 

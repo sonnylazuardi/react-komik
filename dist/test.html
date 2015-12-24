@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>React Komik!</title>
+  
+</head>
+<body>
+  <div id="root">Loading Comic...</div>
+  <script src="https://fb.me/react-with-addons-0.14.3.min.js"></script>
+  <script src="https://fb.me/react-dom-0.14.3.min.js"></script>
+  <script src="komik.js"></script>
+
+  <script>
+  	"use strict";
+
+var _Komik = Komik;
+var Panel = _Komik.Panel;
+var Character = _Komik.Character;
+var Balloon = _Komik.Balloon;
+var Strip = _Komik.Strip;
+
+var imageURL = 'http://sonnylazuardi.github.io/react-komik/dist/';
+
+var Comic = function Comic(props) {
+    return React.createElement(
+        Strip,
+        { title: "React Komik!", column: "2", fontFamily: "Patrick Hand", fontSize: "13", upperCase: true },
+        React.createElement(
+            Panel,
+            null,
+            React.createElement(
+                Character,
+                {
+                    image: "char1.jpg",
+                    left: "70",
+                    scale: "0.65" },
+                React.createElement(Balloon, {
+                    left: "-80",
+                    height: "120",
+                    image: "chat_left.svg",
+                    text: "Have You heard about ReactJS? You can write HTML in JS..." })
+            )
+        ),
+        React.createElement(
+            Panel,
+            null,
+            React.createElement(
+                Character,
+                {
+                    image: "char2.jpg",
+                    left: "30",
+                    scale: "0.65" },
+                React.createElement(Balloon, {
+                    height: "146",
+                    left: "60",
+                    bottom: "-80",
+                    image: "chat_right.svg",
+                    text: "Yeah it's pretty cool. You can use JSX syntax to write web, mobile app, even presentation"
+                })
+            )
+        ),
+        React.createElement(
+            Panel,
+            null,
+            React.createElement(
+                Character,
+                {
+                    image: "char1_hype.jpg",
+                    scale: "0.9",
+                    left: "30" },
+                React.createElement(Balloon, {
+                    height: "130",
+                    left: "-40",
+                    image: "chat_left.svg",
+                    text: "Hey look! It's React Komik! We can create this comic strip with ReactJS!"
+                })
+            )
+        ),
+        React.createElement(
+            Panel,
+            null,
+            React.createElement(
+                Character,
+                {
+                    image: "char2_magic.jpg",
+                    scale: "0.65" },
+                React.createElement(Balloon, {
+                    height: "80",
+                    left: "80",
+                    image: "chat_right.svg",
+                    text: "It's MAGIC"
+                })
+            )
+        )
+    );
+};
+
+ReactDOM.render(React.createElement(Comic, null), document.getElementById('root'));
+  </script>
+   
+</body>
+</html>

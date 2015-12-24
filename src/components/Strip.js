@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import objectAssign from 'object-assign';
+import ReactDOM from 'react-dom';
 
 class Strip extends Component {
     constructor(props) {
@@ -8,12 +9,19 @@ class Strip extends Component {
             canvas: null
         };
     }
+    onDownload() {
+        var link = this.downloadLink;
+        link.setAttribute('href', canvas.toDataURL());
+        link.setAttribute('download', this.props.title+'-react-komik.png');
+        link.click();
+    }
     onEffect(effect) {
         var {canvas} = this.state;
         canvas.deactivateAll();
         var overlayImageUrl = canvas.toDataURL('png');
-        this.refs.imageBuffer.setAttribute('src', overlayImageUrl)
-        var filterImageUrl = this.refs.imageBuffer.getAttribute('src');
+        var imageDOM = ReactDOM.findDOMNode(this.imageBuffer);
+        imageDOM.setAttribute('src', overlayImageUrl)
+        var filterImageUrl = imageDOM.getAttribute('src');
         fabric.Image.fromURL(filterImageUrl, function(img) {
             switch (effect) {
                 case 'grayscale':
@@ -33,12 +41,6 @@ class Strip extends Component {
             canvas.add(img);
         });
         canvas.deactivateAll().renderAll();
-    }
-    onDownload() {
-        var link = this.refs.downloadLink;
-        link.setAttribute('href', canvas.toDataURL());
-        link.setAttribute('download', this.props.title+'-react-komik.png');
-        link.click();
     }
     componentDidMount() {
         var canvas = new fabric.Canvas('canvas');
@@ -83,8 +85,6 @@ class Strip extends Component {
         return (
             <div>
                 <canvas id="canvas" {...this.props}></canvas>
-                <img ref="imageBuffer" src=""  style={{display:'none'}} />
-                <a ref="downloadLink" style={{display: 'none'}}>Download</a>
                 {childrenWithProps}
                 <div>
                     <button onClick={this.onEffect.bind(this, 'grayscale')}>Grayscale</button> 
@@ -92,6 +92,8 @@ class Strip extends Component {
                     <button onClick={this.onEffect.bind(this, 'sepia2')}>Sepia 2</button> 
                     <button onClick={this.onEffect.bind(this, 'invert')}>Invert</button> 
                     <button onClick={this.onDownload.bind(this)}>Download</button>
+                    <img ref={(ref) => this.imageBuffer = ref} src=""  style={{display:'none'}} />
+                    <a ref={(ref) => this.downloadLink = ref} style={{display: 'none'}}>Download</a>
                 </div>
             </div>
         );
