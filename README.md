@@ -2,7 +2,7 @@
 
 ReactJS based comic strip creator
 
-![react-komik](https://cdn.rawgit.com/sonnylazuardi/react-komik/master/dist/logo_big.png)
+![react-komik](http://sonnylazuardi.github.io/react-komik/dist/logo_big.png)
 
 # Usage
 
