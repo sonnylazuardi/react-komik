@@ -1,6 +1,6 @@
 # React Komik!
 
-ReactJS based comic strip creator using [fabric.js](http://fabricjs.com/) canvas rendering. It's like [spectacle](https://github.com/FormidableLabs/spectacle`) but for comic. You can edit (positioning, scaling, coloring) the comic after rendering. Reactify anything, reactify comic.
+ReactJS based comic strip creator using [fabric.js](http://fabricjs.com/) canvas rendering. It's like [spectacle](https://github.com/FormidableLabs/spectacle) but for comic. You can edit (positioning, scaling, coloring) the comic after rendering. Reactify anything, reactify comic.
 
 ![react-komik](http://sonnylazuardi.github.io/react-komik/dist/logo_big.png)
 
