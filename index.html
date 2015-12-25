@@ -22,34 +22,385 @@
       <h1>
 <a id="react-komik" class="anchor" href="#react-komik" aria-hidden="true"><span class="octicon octicon-link"></span></a>React Komik!</h1>
 
-<p>ReactJS based comic strip creator</p>
+<p>ReactJS based comic strip creator using <a href="http://fabricjs.com/">fabric.js</a> canvas rendering. It's like <a href="https://github.com/FormidableLabs/spectacle">spectacle</a> but for comic. You can edit (positioning, scaling, coloring) the comic after rendering. Reactify anything, reactify comic.</p>
 
 <p><img src="http://sonnylazuardi.github.io/react-komik/dist/logo_big.png" alt="react-komik"></p>
 
-<p data-height="560" data-theme-id="0" data-slug-hash="JGKmGE" data-default-tab="result" data-user="sonnylazuardi" class='codepen'>See the Pen <a href='http://codepen.io/sonnylazuardi/pen/JGKmGE/'>JGKmGE</a> by Sonny Lazuardi (<a href='http://codepen.io/sonnylazuardi'>@sonnylazuardi</a>) on <a href='http://codepen.io'>CodePen</a>.</p>
-<script async src="//assets.codepen.io/assets/embed/ei.js"></script>
+<p><img src="https://lh3.googleusercontent.com/-J-FI1QCR8Ic/VnzBfXnWU7I/AAAAAAAACC0/rnfb6O9iiDw/s0/jskomik2.gif" alt="jscomic" title="jskomik2.gif"></p>
 
 <h1>
 <a id="usage" class="anchor" href="#usage" aria-hidden="true"><span class="octicon octicon-link"></span></a>Usage</h1>
+
+<h2>
+<a id="npm-modules" class="anchor" href="#npm-modules" aria-hidden="true"><span class="octicon octicon-link"></span></a>NPM modules</h2>
 
 <p>Just install it from npm</p>
 
 <pre><code>npm install react-komik
 </code></pre>
 
-<p>You can use the component by require it and bundle it with webpack or browserify</p>
+<p>You can use the component by require it and bundle it with webpack or browserify.
+Don't forget to import React, ReactDOM, and use Babel/JSX transformer with ES2015 (recommended)</p>
 
-<pre lang="language-javascript"><code>    import { Strip, Panel, Character, Balloon } from 'react-komik';
+<pre lang="language-javascript"><code>    import React from 'react';
+    import { render } from 'react-dom';
+    import { Strip, Panel, Character, Balloon } from 'react-komik';
 
     let Comic = (props) =&gt; (
-        &lt;Strip title="Your title here" column="2"&gt;
-            &lt;Panel
+        &lt;Strip title="Your title here" column="1"&gt;
+            &lt;Panel&gt;
+                &lt;Character
+                    image="char.png"&gt;
+                    &lt;Balloon 
+                        text="Reactify Comic!" /&gt;
+                &lt;/Character&gt;
+            &lt;/Panel&gt;
         &lt;/Strip&gt;
     );
+
+    render(&lt;Comic /&gt;, document.getElementById('root'));
+</code></pre>
+
+<h2>
+<a id="umd-browser" class="anchor" href="#umd-browser" aria-hidden="true"><span class="octicon octicon-link"></span></a>UMD Browser</h2>
+
+<p>Download or include the <a href="http://sonnylazuardi.github.io/react-komik/dist/komik.js">komik.js</a> file to your HTML. 
+Don't forget to include React, ReactDOM and JSX transformer/Babel.
+Please use NPM modules instead for production.</p>
+
+<pre lang="language-html"><code>    &lt;script src="http://sonnylazuardi.github.io/react-komik/dist/komik.js"&gt;&lt;/script&gt;
+    &lt;script&gt;
+        let { Strip, Panel, Character, Balloon } = Komik;
+
+        class Comic extends React.Component {
+            render() {
+                return (
+                    &lt;Strip title="Your title here" column="1"&gt;
+                        &lt;Panel&gt;
+                            &lt;Character
+                                image="char.png"&gt;
+                                &lt;Balloon 
+                                    text="Reactify Comic!" /&gt;
+                            &lt;/Character&gt;
+                        &lt;/Panel&gt;
+                    &lt;/Strip&gt;
+                );
+            }
+        }
+
+        ReactDOM.render(&lt;Comic /&gt;, document.getElementById('root'));
+    &lt;/script&gt;
 </code></pre>
 
 <h1>
-<a id="umd--commonjs--bower" class="anchor" href="#umd--commonjs--bower" aria-hidden="true"><span class="octicon octicon-link"></span></a>UMD / CommonJS / Bower</h1>
+<a id="demo" class="anchor" href="#demo" aria-hidden="true"><span class="octicon octicon-link"></span></a>Demo</h1>
+
+<p>This demo is using UMD browser, hosted on codepen and jsbin.</p>
+
+<p><a href="http://codepen.io/sonnylazuardi/pen/JGKmGE">http://codepen.io/sonnylazuardi/pen/JGKmGE</a></p>
+
+<p><a href="http://jsbin.com/zaxabi/edit?html,js,output">http://jsbin.com/zaxabi/edit?html,js,output</a></p>
+
+<h1>
+<a id="components" class="anchor" href="#components" aria-hidden="true"><span class="octicon octicon-link"></span></a>Components</h1>
+
+<p>There are four main components:</p>
+
+<h2>
+<a id="strip" class="anchor" href="#strip" aria-hidden="true"><span class="octicon octicon-link"></span></a>Strip</h2>
+
+<table>
+<thead>
+<tr>
+<th>Attribute</th>
+<th>Value Type</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>title</td>
+<td>String</td>
+<td>"Comic Title"</td>
+<td>Your comic title</td>
+</tr>
+<tr>
+<td>column</td>
+<td>Integer</td>
+<td>2</td>
+<td>Number of comic's column</td>
+</tr>
+<tr>
+<td>padding</td>
+<td>Integer</td>
+<td>0</td>
+<td>Comic padding</td>
+</tr>
+<tr>
+<td>width</td>
+<td>Integer</td>
+<td>500</td>
+<td>Comic's width</td>
+</tr>
+<tr>
+<td>height</td>
+<td>Integer</td>
+<td>500</td>
+<td>Comic's height</td>
+</tr>
+<tr>
+<td>top</td>
+<td>Integer</td>
+<td>0</td>
+<td>Comic's top position</td>
+</tr>
+<tr>
+<td>left</td>
+<td>Integer</td>
+<td>0</td>
+<td>Comic's left position</td>
+</tr>
+<tr>
+<td>fill</td>
+<td>String (Color)</td>
+<td>'white'</td>
+<td>Comic's background color</td>
+</tr>
+<tr>
+<td>stroke</td>
+<td>String (Color)</td>
+<td>'black'</td>
+<td>Comic's stroke color</td>
+</tr>
+<tr>
+<td>strokeWidth</td>
+<td>Integer</td>
+<td>0</td>
+<td>Comic's stroke width</td>
+</tr>
+<tr>
+<td>fontFamily</td>
+<td>String (Font Name)</td>
+<td>"Arial"</td>
+<td>Comic's font family</td>
+</tr>
+<tr>
+<td>fontSize</td>
+<td>Integer</td>
+<td>13</td>
+<td>Comic's font size</td>
+</tr>
+<tr>
+<td>upperCase</td>
+<td>Boolan</td>
+<td>false</td>
+<td>Comic's text upper case</td>
+</tr>
+</tbody>
+</table>
+
+<h2>
+<a id="panel" class="anchor" href="#panel" aria-hidden="true"><span class="octicon octicon-link"></span></a>Panel</h2>
+
+<table>
+<thead>
+<tr>
+<th>Attribute</th>
+<th>Value Type</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>height</td>
+<td>Integer</td>
+<td>180</td>
+<td>Panel's height</td>
+</tr>
+<tr>
+<td>padding</td>
+<td>Integer</td>
+<td>20</td>
+<td>Panel's padding</td>
+</tr>
+<tr>
+<td>fill</td>
+<td>String (Color)</td>
+<td>'white'</td>
+<td>Panel's background color</td>
+</tr>
+<tr>
+<td>stroke</td>
+<td>Integer</td>
+<td>'black'</td>
+<td>Panel's stroke color</td>
+</tr>
+<tr>
+<td>strokeWidth</td>
+<td>Integer</td>
+<td>3</td>
+<td>Panel's stroke width</td>
+</tr>
+<tr>
+<td>background</td>
+<td>String (Image URL)</td>
+<td>null</td>
+<td>Panel's background image</td>
+</tr>
+</tbody>
+</table>
+
+<h2>
+<a id="character" class="anchor" href="#character" aria-hidden="true"><span class="octicon octicon-link"></span></a>Character</h2>
+
+<table>
+<thead>
+<tr>
+<th>Attribute</th>
+<th>Value Type</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>image</td>
+<td>String (Image URL)</td>
+<td>'char1.png'</td>
+<td>Character's image</td>
+</tr>
+<tr>
+<td>scale</td>
+<td>Decimal (0 - 1)</td>
+<td>1</td>
+<td>Character's image scale</td>
+</tr>
+<tr>
+<td>align</td>
+<td>String ('center', 'right', 'left')</td>
+<td>'center'</td>
+<td>Character's align position</td>
+</tr>
+<tr>
+<td>left</td>
+<td>Integer</td>
+<td>null</td>
+<td>Character's left position (will overwrite align)</td>
+</tr>
+<tr>
+<td>bottom</td>
+<td>Integer</td>
+<td>0</td>
+<td>Character's bottom position</td>
+</tr>
+<tr>
+<td>top</td>
+<td>Integer</td>
+<td>null</td>
+<td>Character's top position (will overwrite bottom position)</td>
+</tr>
+</tbody>
+</table>
+
+<h2>
+<a id="balloon" class="anchor" href="#balloon" aria-hidden="true"><span class="octicon octicon-link"></span></a>Balloon</h2>
+
+<table>
+<thead>
+<tr>
+<th>Attribute</th>
+<th>Value Type</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>text</td>
+<td>String</td>
+<td>'Hi Bro!'</td>
+<td>Balloon's text</td>
+</tr>
+<tr>
+<td>image</td>
+<td>String (SVG URL)</td>
+<td>'chat_right.svg'</td>
+<td>Chat balloon SVG images</td>
+</tr>
+<tr>
+<td>left</td>
+<td>Integer</td>
+<td>null</td>
+<td>Balloon's left position</td>
+</tr>
+<tr>
+<td>bottom</td>
+<td>Integer (from Character's top)</td>
+<td>-70</td>
+<td>Balloon's bottom position</td>
+</tr>
+<tr>
+<td>top</td>
+<td>Integer</td>
+<td>null</td>
+<td>Balloon's top position (will overwrite bottom)</td>
+</tr>
+<tr>
+<td>scale</td>
+<td>Decimal (0 - 1)</td>
+<td>0.8</td>
+<td>Balloon's image scale</td>
+</tr>
+<tr>
+<td>align</td>
+<td>String ('center', 'left', 'right')</td>
+<td>'left'</td>
+<td>Balloon's align from character</td>
+</tr>
+<tr>
+<td>padding</td>
+<td>Integer</td>
+<td>12</td>
+<td>Balloon's text padding</td>
+</tr>
+<tr>
+<td>height</td>
+<td>Integer</td>
+<td>150</td>
+<td>Balloon's height</td>
+</tr>
+<tr>
+<td>textAlign</td>
+<td>String ('center', 'left', 'right')</td>
+<td>'center'</td>
+<td>Balloon's text align</td>
+</tr>
+<tr>
+<td>fontFamily</td>
+<td>String (Font Name)</td>
+<td>(The same with Strip's fontFamily)</td>
+<td>Balloon's font family</td>
+</tr>
+<tr>
+<td>fontSize</td>
+<td>Integer</td>
+<td>(The same with Strip's fontSize)</td>
+<td>Balloon's font size</td>
+</tr>
+</tbody>
+</table>
+
+<h1>
+<a id="contributing" class="anchor" href="#contributing" aria-hidden="true"><span class="octicon octicon-link"></span></a>Contributing</h1>
+
+<p>Ideas, issues, and PRs are welcomed. You can also directly shoot me an email at <a href="mailto:sonnylazuardi@gmail.com">sonnylazuardi@gmail.com</a>.</p>
+
+<h1>
+<a id="js-comic" class="anchor" href="#js-comic" aria-hidden="true"><span class="octicon octicon-link"></span></a>JS Comic</h1>
+
+<p>This project is actually an effort to write comic easier for <a href="http://jscomic.net">JS Comic</a>. Please follow <a href="https://twitter.com/jscomicnet">@jscomicnet</a> or like <a href="https://facebook.com/jscomicnet">JS Comic FB page</a>.</p>
 
 <h1>
 <a id="license" class="anchor" href="#license" aria-hidden="true"><span class="octicon octicon-link"></span></a>License</h1>
