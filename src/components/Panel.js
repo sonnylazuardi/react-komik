@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-// import Object.assign from 'object-assign';
+import objectAssign from 'object-assign';
 
 class Panel extends Component {
     constructor(props) {
@@ -11,7 +11,7 @@ class Panel extends Component {
         };
     }
     update() {
-    	var _this = this;
+        var _this = this;
         setTimeout(() => {
             var { canvas, index } = this.props;
             var { parent, height, padding, fill, stroke, strokeWidth, background } = this.props;
@@ -60,11 +60,11 @@ class Panel extends Component {
 
             if (background) {
                 if (!this.state.background) {
-                	fabric.Image.fromURL(background, (image) => {
+                    fabric.Image.fromURL(background, (image) => {
                         this.setState({background: image});
-                		image.set(currentProps);
-                		canvas.add(image);
-                	});
+                        image.set(currentProps);
+                        canvas.add(image);
+                    });
                 }
             }
 
@@ -79,11 +79,11 @@ class Panel extends Component {
     }
     render() {
         var _this = this;
-        var parentProps = Object.assign({}, _this.props, _this.state.props);
+        var parentProps = objectAssign({}, _this.props, _this.state.props);
         delete parentProps.children;
-        var childProps = Object.assign({}, {canvas: _this.props.canvas, parent: parentProps, rootParent: _this.props.rootParent});
+        var childProps = objectAssign({}, {canvas: _this.props.canvas, parent: parentProps, rootParent: _this.props.rootParent});
         var childrenWithProps = React.Children.map(this.props.children, function(child, id) {
-            var currentProps = Object.assign({}, childProps, {index: id});
+            var currentProps = objectAssign({}, childProps, {index: id});
             return React.cloneElement(child, currentProps);
         });
         return (<div>{childrenWithProps}</div>);

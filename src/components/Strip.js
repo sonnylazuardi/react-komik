@@ -10,6 +10,7 @@ class Strip extends Component {
         };
     }
     onDownload() {
+        var {canvas} = this.state;
         var link = this.downloadLink;
         link.setAttribute('href', canvas.toDataURL());
         link.setAttribute('download', this.props.title+'-react-komik.png');
@@ -20,8 +21,11 @@ class Strip extends Component {
         canvas.deactivateAll();
         var overlayImageUrl = canvas.toDataURL('png');
         var imageDOM = ReactDOM.findDOMNode(this.imageBuffer);
-        imageDOM.setAttribute('src', overlayImageUrl)
+        imageDOM.setAttribute('src', overlayImageUrl);
+        imageDOM.setAttribute('crossOrigin', 'anonymous');
         var filterImageUrl = imageDOM.getAttribute('src');
+        // patch fabric for cross domain image jazz
+        
         fabric.Image.fromURL(filterImageUrl, function(img) {
             switch (effect) {
                 case 'grayscale':
@@ -39,6 +43,8 @@ class Strip extends Component {
             }
             img.applyFilters(canvas.renderAll.bind(canvas));
             canvas.add(img);
+        }, {
+            crossOrigin: 'anonymous'
         });
         canvas.deactivateAll().renderAll();
     }
