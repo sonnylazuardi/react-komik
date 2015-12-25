@@ -59,6 +59,8 @@ class Balloon extends Component {
                 });
                 image.set(currentProps);
                 resolve(image);   
+            }, {
+                crossOrigin: 'anonymous'
             });
         });
     }

@@ -61,6 +61,8 @@ class Character extends Component {
                     });
                     canvas.add(image);
                 }
+            }, {
+                crossOrigin: 'anonymous'
             });
         });
     }
