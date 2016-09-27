@@ -17,7 +17,7 @@ Just install it from npm
 You can use the component by require it and bundle it with webpack or browserify.
 Don't forget to import React, ReactDOM, and use Babel/JSX transformer with ES2015 (recommended)
 
-```language-javascript
+```javascript
 	import React from 'react';
 	import { render } from 'react-dom';
 	import { Strip, Panel, Character, Balloon } from 'react-komik';
@@ -43,7 +43,7 @@ Download or include the [komik.js](http://sonnylazuardi.github.io/react-komik/di
 Don't forget to include React, ReactDOM and JSX transformer/Babel.
 Please use NPM modules instead for production.
 
-```language-html
+```html
 	<script src="http://sonnylazuardi.github.io/react-komik/dist/komik.js"></script>
 	<script>
 		let { Strip, Panel, Character, Balloon } = Komik;
